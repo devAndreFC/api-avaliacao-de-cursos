@@ -1,8 +1,15 @@
 from django.urls import path
+from rest_framework_simplejwt import views as jwt_views
 
 from rest_framework.routers import SimpleRouter # V2
 
-from .views import CursoAPIView, AvaliacaoAPIView, AvaliacoesAPIView, CursosAPIView, CursoViewSet, AvaliacaoViewSet
+from .views import (
+    CursoAPIView, 
+    AvaliacaoAPIView, 
+    AvaliacoesAPIView, 
+    CursosAPIView, 
+    CursoViewSet, 
+    AvaliacaoViewSet)
 
 
 router = SimpleRouter()
@@ -16,5 +23,8 @@ urlpatterns = [
     path('cursos/<int:curso_pk>/avaliacoes/<int:avaliacao_pk>/', AvaliacaoAPIView.as_view(), name='curso_avaliacao'),
 
     path('avaliacoes/', AvaliacoesAPIView.as_view(), name='avaliacoes'),
-    path('avaliacoes/<int:avaliacao_pk>/', AvaliacaoAPIView.as_view(), name='avaliacao')
+    path('avaliacoes/<int:avaliacao_pk>/', AvaliacaoAPIView.as_view(), name='avaliacao'),
+
+    # path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ]

@@ -8,6 +8,14 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
+
+Token:
+cd42a491453e273f42f4f0362e4052b1dfb7a361
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY4ODczOTQ0MSwiaWF0IjoxNjg4NjUzMDQxLCJqdGkiOiJhMzAxMjNkNDg1YTM0YzQ3ODMyNTEwOTBiNzgyZTgxOCIsInVzZXJfaWQiOjF9.2zKU2iqT1cHesNefGaXkrTH9cDwYGGemNpheMN9yOIs",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjg4NjUzMzQxLCJpYXQiOjE2ODg2NTMwNDEsImp0aSI6ImIwMTczMWMzYmMwNjQ2YTRiODBkNGU2ZDQ0ZTFhMDU1IiwidXNlcl9pZCI6MX0.WOHyd2haiFzP6hTTR0G45AbEEp0XBtA5YrJBC1at_EE"
+}
 """
 
 from pathlib import Path
@@ -37,8 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'django_filters',
     'rest_framework',
+    'rest_framework.authtoken',
 
     'cursos',
 ]
@@ -126,14 +136,17 @@ MEDIA_ROOT = (BASE_DIR / 'media')
 
 # DRF
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CASSES': (
-        'rest_framework.authentication.SessionAuthentication'
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 2
+    'PAGE_SIZE': 10
+
 }
 
 # Default primary key field type
